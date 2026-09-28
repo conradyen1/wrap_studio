@@ -3,108 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Create a custom vehicle wrap locally in your browser." />
-    <title>Wrap Studio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
+    <meta name="description" content="Design and preview a custom vehicle wrap in 3D." />
+    <title>Wrap Studio — 3D vehicle wrap designer</title>
   </head>
   <body>
-    <header class="topbar">
-      <a class="brand" href="#" aria-label="Wrap Studio home">
-        <span class="brand-mark"><i></i><i></i></span>
-        <span>WRAP / STUDIO</span>
-      </a>
-      <div class="top-actions">
-        <span class="privacy"><span class="status-dot"></span> Private session · files stay local</span>
-        <button class="button button-primary" id="exportTop">Export wrap <span>↗</span></button>
-      </div>
-    </header>
-
-    <main class="app-shell">
-      <aside class="sidebar left-panel">
-        <div class="panel-heading">
-          <span class="eyebrow">01 / Vehicle</span>
-          <h1>Choose your canvas.</h1>
-        </div>
-        <label class="field-label" for="modelSelect">Vehicle model</label>
-        <div class="select-wrap">
-          <select id="modelSelect">
-            <option value="model3">Model 3</option>
-            <option value="modely">Model Y</option>
-            <option value="models">Model S</option>
-            <option value="modelx">Model X</option>
-            <option value="cybertruck">Cybertruck</option>
-          </select>
-        </div>
-        <div class="vehicle-card" aria-hidden="true">
-          <svg viewBox="0 0 300 110"><path d="M20 76c7-4 15-6 25-7l36-35c10-9 24-14 39-15h53c16 1 30 7 41 18l26 29 29 7c7 2 11 8 11 15v4h-22c-2-14-13-24-27-24s-25 10-27 24H93c-2-14-13-24-27-24S41 78 39 92H16v-8c0-4 1-6 4-8Z"/><path d="m92 37 30-10h49c12 0 22 4 31 12l20 24H72l20-26Z" class="window"/><circle cx="66" cy="91" r="15"/><circle cx="231" cy="91" r="15"/></svg>
-          <div><strong id="modelCardName">MODEL 3</strong><span id="modelMeta">Sedan · 4 panels</span></div>
-        </div>
-        <div class="divider"></div>
-        <div class="section-title"><span class="eyebrow">02 / Artwork</span><span id="layerCount">0 layers</span></div>
-        <label class="upload-zone" id="uploadZone" for="fileInput">
-          <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp,image/svg+xml" multiple />
-          <span class="upload-icon">＋</span>
-          <strong>Add your artwork</strong>
-          <span>PNG, JPG, WEBP or SVG · Multiple files</span>
-        </label>
-        <div class="layer-list" id="layerList"><div class="empty-layers">Your image layers will appear here.</div></div>
-      </aside>
-
-      <section class="workspace">
-        <div class="workspace-head">
-          <div>
-            <span class="eyebrow">LIVE CANVAS</span>
-            <h2 id="canvasTitle">MODEL 3 / WRAP TEMPLATE</h2>
-          </div>
-          <div class="zoom-controls" aria-label="Zoom controls">
-            <button id="zoomOut" aria-label="Zoom out">−</button><span id="zoomLabel">100%</span><button id="zoomIn" aria-label="Zoom in">＋</button>
-          </div>
-        </div>
-        <div class="canvas-stage" id="canvasStage">
-          <canvas id="editorCanvas" width="1600" height="1000" aria-label="Vehicle wrap editor canvas"></canvas>
-          <div class="canvas-empty" id="canvasEmpty">
-            <span>DROP ARTWORK TO BEGIN</span>
-            <small>Move, scale and rotate each image on the template</small>
-          </div>
-        </div>
-        <div class="workspace-foot">
-          <span><i class="key">DRAG</i> Move image</span>
-          <span><i class="key">CORNERS</i> Resize</span>
-          <span><i class="key">●</i> Rotate</span>
-          <span class="safe-note">Dashed line = printable safe area</span>
-        </div>
-      </section>
-
-      <aside class="sidebar right-panel">
-        <div class="panel-heading"><span class="eyebrow">03 / Fine tune</span><h2>Layer controls.</h2></div>
-        <div id="noSelection" class="no-selection">Select an image on the canvas to edit it.</div>
-        <div id="controls" class="controls" hidden>
-          <label class="field-label">Selected layer</label>
-          <div class="selected-name" id="selectedName"></div>
-          <div class="control-row"><label for="scaleRange">Scale</label><output id="scaleValue">100%</output></div>
-          <input type="range" id="scaleRange" min="10" max="300" value="100" />
-          <div class="control-row"><label for="rotationRange">Rotation</label><output id="rotationValue">0°</output></div>
-          <input type="range" id="rotationRange" min="-180" max="180" value="0" />
-          <div class="control-row"><label for="opacityRange">Opacity</label><output id="opacityValue">100%</output></div>
-          <input type="range" id="opacityRange" min="10" max="100" value="100" />
-          <div class="arrange-buttons">
-            <button id="moveUp">Move forward</button><button id="moveDown">Move back</button>
-            <button id="duplicate">Duplicate</button><button id="deleteLayer" class="danger">Delete</button>
-          </div>
-        </div>
-        <div class="export-card">
-          <span class="eyebrow">04 / Export</span>
-          <h3>Ready for the road?</h3>
-          <p>Your selected vehicle template and artwork are combined into one print-ready PNG.</p>
-          <button class="button button-primary button-full" id="downloadButton">Download wrap <span>↓</span></button>
-          <span class="export-size">PNG · 1600 × 1000 px</span>
-        </div>
-      </aside>
-    </main>
-    <div class="toast" id="toast" role="status"></div>
-    <script type="module" src="app.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

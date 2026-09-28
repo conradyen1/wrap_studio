@@ -1,19 +1,22 @@
-# Wrap Studio
+# Wrap Studio 3D
 
-A browser-based vehicle wrap composer inspired by Tesla's public custom-wrap template workflow. Pick a vehicle, add several local image files, move/scale/rotate/reorder them, and export the artwork together with the selected template as a PNG.
+A React, Tailwind CSS, and Three.js vehicle-wrap editor inspired by Tesla's public custom-wrap workflow. Choose a vehicle, layer local image files on a 2D print canvas, and see the composite update live on a rotatable 3D car. Export the finished 2048 × 1024 wrap template as a PNG.
 
-All image processing happens in the browser. Uploaded files are represented with local object URLs and are never sent to a server.
+All image processing happens in the browser. Uploaded files are represented with local object URLs and are never sent to a server. The car is built from optimized Three.js geometry, avoiding an unverified third-party model license or a fragile runtime download.
 
 ## Run locally
 
 ```bash
-npm start
+npm install
+npm run dev
 ```
 
-Open `http://localhost:4173` in Chrome.
+Open the URL printed by Vite in Chrome.
 
 ## Test
 
 ```bash
 npm test
 ```
+
+Run `npm run build` to create a production bundle.
